@@ -1,18 +1,18 @@
 //
-//  ViewController.m
+//  ContactViewController.m
 //  ContactsApp
 //
 //  Created by Hanna Rybakova on 6/8/19.
 //  Copyright © 2019 None. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ContactViewController.h"
 
-@interface ViewController ()
+@interface ContactViewController ()
 
 @end
 
-@implementation ViewController
+@implementation ContactViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

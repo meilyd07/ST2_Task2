@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ContactViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    ContactViewController *viewController = [ContactViewController new];
+    self.window.backgroundColor = [UIColor whiteColor];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: viewController];
+    [self.window setRootViewController:nav];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

@@ -7,21 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A9DCD2F22ABFAAC0006044F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9DCD2E22ABFAAC0006044F /* DetailViewController.m */; };
 		6AD7B8FD22ABBF1A00FACFA5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7B8FC22ABBF1A00FACFA5 /* AppDelegate.m */; };
-		6AD7B90022ABBF1A00FACFA5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7B8FF22ABBF1A00FACFA5 /* ViewController.m */; };
-		6AD7B90322ABBF1A00FACFA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7B90122ABBF1A00FACFA5 /* Main.storyboard */; };
+		6AD7B90022ABBF1A00FACFA5 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7B8FF22ABBF1A00FACFA5 /* ContactViewController.m */; };
 		6AD7B90522ABBF1B00FACFA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7B90422ABBF1B00FACFA5 /* Assets.xcassets */; };
 		6AD7B90822ABBF1B00FACFA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD7B90622ABBF1B00FACFA5 /* LaunchScreen.storyboard */; };
 		6AD7B90B22ABBF1B00FACFA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD7B90A22ABBF1B00FACFA5 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A9DCD2D22ABFAAC0006044F /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		6A9DCD2E22ABFAAC0006044F /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		6AD7B8F822ABBF1A00FACFA5 /* ContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD7B8FB22ABBF1A00FACFA5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AD7B8FC22ABBF1A00FACFA5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6AD7B8FE22ABBF1A00FACFA5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6AD7B8FF22ABBF1A00FACFA5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6AD7B90222ABBF1A00FACFA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6AD7B8FE22ABBF1A00FACFA5 /* ContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
+		6AD7B8FF22ABBF1A00FACFA5 /* ContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
 		6AD7B90422ABBF1B00FACFA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AD7B90722ABBF1B00FACFA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AD7B90922ABBF1B00FACFA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,9 +61,10 @@
 			children = (
 				6AD7B8FB22ABBF1A00FACFA5 /* AppDelegate.h */,
 				6AD7B8FC22ABBF1A00FACFA5 /* AppDelegate.m */,
-				6AD7B8FE22ABBF1A00FACFA5 /* ViewController.h */,
-				6AD7B8FF22ABBF1A00FACFA5 /* ViewController.m */,
-				6AD7B90122ABBF1A00FACFA5 /* Main.storyboard */,
+				6A9DCD2D22ABFAAC0006044F /* DetailViewController.h */,
+				6A9DCD2E22ABFAAC0006044F /* DetailViewController.m */,
+				6AD7B8FE22ABBF1A00FACFA5 /* ContactViewController.h */,
+				6AD7B8FF22ABBF1A00FACFA5 /* ContactViewController.m */,
 				6AD7B90422ABBF1B00FACFA5 /* Assets.xcassets */,
 				6AD7B90622ABBF1B00FACFA5 /* LaunchScreen.storyboard */,
 				6AD7B90922ABBF1B00FACFA5 /* Info.plist */,
@@ -130,7 +132,6 @@
 			files = (
 				6AD7B90822ABBF1B00FACFA5 /* LaunchScreen.storyboard in Resources */,
 				6AD7B90522ABBF1B00FACFA5 /* Assets.xcassets in Resources */,
-				6AD7B90322ABBF1A00FACFA5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,23 +142,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AD7B90022ABBF1A00FACFA5 /* ViewController.m in Sources */,
+				6AD7B90022ABBF1A00FACFA5 /* ContactViewController.m in Sources */,
 				6AD7B90B22ABBF1B00FACFA5 /* main.m in Sources */,
 				6AD7B8FD22ABBF1A00FACFA5 /* AppDelegate.m in Sources */,
+				6A9DCD2F22ABFAAC0006044F /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6AD7B90122ABBF1A00FACFA5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6AD7B90222ABBF1A00FACFA5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6AD7B90622ABBF1B00FACFA5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -220,7 +214,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -273,7 +267,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -288,6 +282,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BL2QCUUKYP;
 				INFOPLIST_FILE = ContactsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BL2QCUUKYP;
 				INFOPLIST_FILE = ContactsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ContactViewController.h
 //  ContactsApp
 //
 //  Created by Hanna Rybakova on 6/8/19.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ContactViewController : UIViewController
 
 
 @end
