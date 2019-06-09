@@ -48,14 +48,6 @@
                                                                     multiplier:1
                                                                       constant:0];
     [self.contentView addConstraint:centerButtonY];
-//    NSLayoutConstraint *distance = [NSLayoutConstraint constraintWithItem:self.contactName
-//                                                                attribute:NSLayoutAttributeTrailing
-//                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
-//                                                                   toItem:self.infoButton
-//                                                                attribute:NSLayoutAttributeLeading
-//                                                               multiplier:1
-//                                                                 constant:10];
-//    [self.contentView addConstraint:distance];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -12,6 +12,7 @@
 @interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *data;
+@property (assign, nonatomic) BOOL collapsed;
 @end
 
 @implementation ContactsViewController
@@ -43,6 +44,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 70;
+    self.collapsed = YES;
     self.data = [self.viewModel getData];
 }
 
@@ -96,6 +98,71 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     contactCell.contactName.text = self.data[indexPath.section][1][indexPath.row];
     return contactCell;
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,
+                                                                  tableView.bounds.size.width, 60)];
+    headerView.backgroundColor = [UIColor colorWithRed:249.0f/255.0f green:249.0f/255.0f blue:249.0f/255.0f alpha:1.0f];
+    
+    UILabel *letter = [[UILabel alloc]
+                       initWithFrame:CGRectMake(0, 0,
+                                                40, 60)];
+    letter.textColor = self.collapsed ? [UIColor redColor] : [UIColor greenColor];
+    letter.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightBold];;
+    letter.text = [NSString stringWithFormat:@"%@", self.data[section][0]];
+    [headerView addSubview:letter];
+    
+    UILabel *contacts = [[UILabel alloc]
+                         initWithFrame:CGRectMake(0, 0,
+                                                  60, 60)];
+    contacts.textColor = self.collapsed ? [UIColor redColor] : [UIColor greenColor];
+    contacts.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightBold];;
+    NSInteger contactsCount = ((NSArray *)self.data[section][1]).count;
+    contacts.text = [NSString stringWithFormat:@"контактов: %ld", contactsCount];
+    [headerView addSubview:contacts];
+    
+    UIImageView *dot =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,20,20)];
+    dot.image=self.collapsed ? [UIImage imageNamed:@"arrow_down.png"] : [UIImage imageNamed:@"arrow_up.png"];
+    [headerView addSubview:dot];
+
+    //add constraints
+    letter.translatesAutoresizingMaskIntoConstraints = NO;
+    contacts.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:letter attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:headerView attribute:NSLayoutAttributeLeading multiplier:1 constant:25];
+    
+    NSLayoutConstraint *centerLetterY = [NSLayoutConstraint constraintWithItem:letter attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+                                                                     toItem:headerView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *centerContactsY = [NSLayoutConstraint constraintWithItem:contacts attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+                                                                        toItem:headerView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *distance = [NSLayoutConstraint constraintWithItem:letter attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:contacts attribute:NSLayoutAttributeLeading multiplier:1 constant:-10];
+    [headerView addConstraint:leading];
+    [headerView addConstraint:centerLetterY];
+    [headerView addConstraint:centerContactsY];
+    [headerView addConstraint:distance];
+    
+    dot.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:dot attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:headerView attribute:NSLayoutAttributeTrailing multiplier:1 constant:-20];
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:dot attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:20];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:dot attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:20];
+    
+    NSLayoutConstraint *centerDotY = [NSLayoutConstraint constraintWithItem:dot attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+        toItem:headerView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    [headerView addConstraint:trailing];
+    [headerView addConstraint:width];
+    [headerView addConstraint:height];
+    [headerView addConstraint:centerDotY];
+    
+    
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.1f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 60;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
