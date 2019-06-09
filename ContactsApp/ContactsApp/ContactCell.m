@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:254.0f/255.0f green:246.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
+    [self setSelectedBackgroundView:bgColorView];
     self.contactName.lineBreakMode = NSLineBreakByTruncatingMiddle;
     self.contactName.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.contactName
@@ -48,17 +51,6 @@
                                                                     multiplier:1
                                                                       constant:0];
     [self.contentView addConstraint:centerButtonY];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-    //
 }
 
 @end
