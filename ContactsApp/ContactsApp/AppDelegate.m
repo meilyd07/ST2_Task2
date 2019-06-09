@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ContactViewController.h"
+#import "ContactsViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    ContactViewController *viewController = [ContactViewController new];
+    ContactsViewController *viewController = [ContactsViewController new];
+    ContactsViewModel *viewModel = [ContactsViewModel new];
+    viewController.viewModel = viewModel;
     self.window.backgroundColor = [UIColor whiteColor];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: viewController];
     [self.window setRootViewController:nav];
