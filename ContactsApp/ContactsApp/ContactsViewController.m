@@ -93,12 +93,18 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
         contactCell = (ContactCell *)[nibs objectAtIndex:0];
     }
     
-    contactCell.contactName.text = self.data[indexPath.row];
+    contactCell.contactName.text = self.data[indexPath.section][1][indexPath.row];
     return contactCell;
     
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSArray *array = self.data[section];
+    NSArray *arrayNames = array[1];
+    return arrayNames.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.data.count;
 }
 

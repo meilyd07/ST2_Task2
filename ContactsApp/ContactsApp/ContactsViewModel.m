@@ -9,7 +9,17 @@
 #import "ContactsViewModel.h"
 
 @implementation ContactsViewModel
+//-(NSMutableArray *)getData {
+//    return [@[ @"Jonh Dou", @"Ray Wenderlich", @"Jean Bean" ] mutableCopy];
+//}
+
 -(NSMutableArray *)getData {
-    return [@[ @"Jonh Dou", @"Ray Wenderlich", @"Jean Bean" ] mutableCopy];
+    NSMutableArray *array = [@[
+          @[@"A", @[ @"Anqapoyn John", @"Andreyev Ivan"]],
+          @[@"D", @[ @"Dou John", @"Devanovsky Alex"]],
+          @[@"W", @[ @"Wenderlich Ray"]],
+          @[@"В", @[@"Васенцов Андрей", @"Величко Настя"]]
+                       ] mutableCopy] ;
+    return array;
 }
 @end
