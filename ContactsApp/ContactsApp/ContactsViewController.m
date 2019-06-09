@@ -21,12 +21,28 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     [super viewDidLoad];
     [self setupTable];
     [self addTableConstraints];
+    [self setupNavigationBar];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    CGFloat height = 67;
+    [self.navigationController.navigationBar setFrame:CGRectMake(0, 0,
+                                                                 self.view.frame.size.width,height)];
+}
+
+- (void)setupNavigationBar {
+    [self setTitle:@"Контакты"];
+    UIFont *font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor blackColor],
+       NSFontAttributeName:font}];
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
 }
 
 -(void)setupTable {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-   
+    self.tableView.rowHeight = 70;
     self.data = [self.viewModel getData];
 }
 
