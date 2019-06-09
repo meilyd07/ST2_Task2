@@ -12,7 +12,7 @@
 @interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *data;
-@property (assign, nonatomic) BOOL collapsed;
+@property (strong, nonatomic) NSMutableSet *collapsedSet;
 @end
 
 @implementation ContactsViewController
@@ -23,12 +23,6 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     [self setupTable];
     [self addTableConstraints];
     [self setupNavigationBar];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    CGFloat height = 67;
-    [self.navigationController.navigationBar setFrame:CGRectMake(0, 0,
-                                                                 self.view.frame.size.width,height)];
 }
 
 - (void)setupNavigationBar {
@@ -44,8 +38,8 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 70;
-    self.collapsed = YES;
     self.data = [self.viewModel getData];
+    self.collapsedSet = [[NSMutableSet alloc] init];
 }
 
 -(void)addTableConstraints {
@@ -101,14 +95,23 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+   
+    BOOL collapsed = [self.collapsedSet containsObject:[NSNumber numberWithInteger:section]];
+    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,
                                                                   tableView.bounds.size.width, 60)];
+    headerView.layer.borderWidth = 1;
+    headerView.layer.borderColor = [[UIColor colorWithRed:223.0f/255.0f green:223.0f/255.0f blue:223.0f/255.0f alpha:1.0f] CGColor];
+    headerView.tag = section;
     headerView.backgroundColor = [UIColor colorWithRed:249.0f/255.0f green:249.0f/255.0f blue:249.0f/255.0f alpha:1.0f];
     
     UILabel *letter = [[UILabel alloc]
                        initWithFrame:CGRectMake(0, 0,
                                                 40, 60)];
-    letter.textColor = self.collapsed ? [UIColor redColor] : [UIColor greenColor];
+    UIColor *expandedBlackColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
+    UIColor *collapsedColor = [UIColor colorWithRed:217.0f/255.0f green:145.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
+    UIColor *expandedGrayColor = [UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1.0f];
+    letter.textColor = collapsed ? collapsedColor : expandedBlackColor;
     letter.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightBold];;
     letter.text = [NSString stringWithFormat:@"%@", self.data[section][0]];
     [headerView addSubview:letter];
@@ -116,14 +119,14 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     UILabel *contacts = [[UILabel alloc]
                          initWithFrame:CGRectMake(0, 0,
                                                   60, 60)];
-    contacts.textColor = self.collapsed ? [UIColor redColor] : [UIColor greenColor];
-    contacts.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightBold];;
+    contacts.textColor = collapsed ? collapsedColor : expandedGrayColor;
+    contacts.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightLight];;
     NSInteger contactsCount = ((NSArray *)self.data[section][1]).count;
     contacts.text = [NSString stringWithFormat:@"контактов: %ld", contactsCount];
     [headerView addSubview:contacts];
     
     UIImageView *dot =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,20,20)];
-    dot.image=self.collapsed ? [UIImage imageNamed:@"arrow_down.png"] : [UIImage imageNamed:@"arrow_up.png"];
+    dot.image= collapsed ? [UIImage imageNamed:@"arrow_up.png"] : [UIImage imageNamed:@"arrow_down.png"];
     [headerView addSubview:dot];
 
     //add constraints
@@ -153,8 +156,19 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     [headerView addConstraint:height];
     [headerView addConstraint:centerDotY];
     
-    
+    [headerView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
     return headerView;
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)recognizer
+{
+    NSInteger section = recognizer.view.tag;
+    if ([self.collapsedSet containsObject:[NSNumber numberWithInteger:section]]) {
+        [self.collapsedSet removeObject:[NSNumber numberWithInteger:section]];
+    } else {
+      [self.collapsedSet addObject:[NSNumber numberWithInteger:section]];
+    }
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -168,7 +182,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *array = self.data[section];
     NSArray *arrayNames = array[1];
-    return arrayNames.count;
+    return [self.collapsedSet containsObject:[NSNumber numberWithInteger:section]] ? 0 : arrayNames.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
