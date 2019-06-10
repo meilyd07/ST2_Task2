@@ -25,12 +25,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="6qc-MD-sBL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Qcd-GB-3R6"/>
                     <constraint firstItem="6qc-MD-sBL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="XJh-mC-WyZ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="phoneNumber" destination="6qc-MD-sBL" id="v6q-SN-FAT"/>
             </connections>

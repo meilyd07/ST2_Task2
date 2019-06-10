@@ -15,7 +15,6 @@
 @end
 
 @implementation DetailViewController
-//static NSString *TableViewAvatarCellIdentifier = @"AvatarCell";
 static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
 
 - (void)viewDidLoad {
@@ -28,6 +27,8 @@ static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 70;
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.alwaysBounceVertical = NO;
 }
 
 - (void)setupNavigationBar {
@@ -36,7 +37,8 @@ static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor blackColor],
        NSFontAttributeName:font}];
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.barTintColor = [UINavigationBar appearance].barTintColor;
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -49,8 +51,14 @@ static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
         contactCell = (PhoneCell *)[nibs objectAtIndex:0];
     }
     
-    contactCell.phoneNumber = self.person.phones[indexPath.row];
+    contactCell.phoneNumber.text = self.person.phones[indexPath.row];
     return contactCell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor whiteColor];
+    return view;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -92,15 +100,11 @@ static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
     [headerView addConstraint:centerContactsX];
     [headerView addConstraint:distance];
     
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:160];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:160];
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:150];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:150];
     [headerView addConstraint:width];
     [headerView addConstraint:height];
     return headerView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.1f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

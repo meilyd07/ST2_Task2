@@ -39,13 +39,15 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor blackColor],
        NSFontAttributeName:font}];
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.barTintColor = [UINavigationBar appearance].barTintColor;
 }
 
 -(void)setupTable {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 70;
+    self.tableView.backgroundColor = [UIColor whiteColor];
     [self.viewModel getData];
     self.collapsedSet = [[NSMutableSet alloc] init];
 }
@@ -100,7 +102,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     contactCell.contactName.text = [self.viewModel getContactNameBySection:indexPath.section row:indexPath.row];
     contactCell.delegate = self;
     contactCell.cellIndexRow = indexPath.row;
-    contactCell.cellIndexRow = indexPath.section;
+    contactCell.cellIndexSection = indexPath.section;
     return contactCell;
     
 }
