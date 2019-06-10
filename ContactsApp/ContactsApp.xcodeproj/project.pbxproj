@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A310D5E22ADD0C300A3F355 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A310D5D22ADD0C300A3F355 /* Person.m */; };
 		6A88525922AC6175007A5F82 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A88525722AC6175007A5F82 /* ContactsViewController.m */; };
 		6A88525A22AC6175007A5F82 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A88525822AC6175007A5F82 /* ContactsViewController.xib */; };
 		6A88525D22AC6514007A5F82 /* ContactsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A88525C22AC6514007A5F82 /* ContactsViewModel.m */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A310D5C22ADD0C300A3F355 /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6A310D5D22ADD0C300A3F355 /* Person.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		6A88525622AC6175007A5F82 /* ContactsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		6A88525722AC6175007A5F82 /* ContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		6A88525822AC6175007A5F82 /* ContactsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				6AD7B8FB22ABBF1A00FACFA5 /* AppDelegate.h */,
+				6A310D5C22ADD0C300A3F355 /* Person.h */,
+				6A310D5D22ADD0C300A3F355 /* Person.m */,
 				6AD7B8FC22ABBF1A00FACFA5 /* AppDelegate.m */,
 				6AD7B90422ABBF1B00FACFA5 /* Assets.xcassets */,
 				6A88525622AC6175007A5F82 /* ContactsViewController.h */,
@@ -164,6 +169,7 @@
 			files = (
 				6A88526822AC6FD8007A5F82 /* ContactCell.m in Sources */,
 				6AD7B90B22ABBF1B00FACFA5 /* main.m in Sources */,
+				6A310D5E22ADD0C300A3F355 /* Person.m in Sources */,
 				6A88525922AC6175007A5F82 /* ContactsViewController.m in Sources */,
 				6AD7B8FD22ABBF1A00FACFA5 /* AppDelegate.m in Sources */,
 				6A88525D22AC6514007A5F82 /* ContactsViewModel.m in Sources */,

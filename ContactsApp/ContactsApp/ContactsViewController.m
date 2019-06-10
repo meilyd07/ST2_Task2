@@ -11,7 +11,6 @@
 
 @interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *data;
 @property (strong, nonatomic) NSMutableSet *collapsedSet;
 @end
 
@@ -38,7 +37,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 70;
-    self.data = [self.viewModel getData];
+    [self.viewModel getData];
     self.collapsedSet = [[NSMutableSet alloc] init];
 }
 
@@ -89,7 +88,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
         contactCell = (ContactCell *)[nibs objectAtIndex:0];
     }
     
-    contactCell.contactName.text = self.data[indexPath.section][1][indexPath.row];
+    contactCell.contactName.text = [self.viewModel getContactNameBySection:indexPath.section row:indexPath.row];
     return contactCell;
     
 }
@@ -113,7 +112,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     UIColor *expandedGrayColor = [UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1.0f];
     letter.textColor = collapsed ? collapsedColor : expandedBlackColor;
     letter.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightBold];;
-    letter.text = [NSString stringWithFormat:@"%@", self.data[section][0]];
+    letter.text = [NSString stringWithFormat:@"%@", [self.viewModel getSectionNameBySection:section]];
     [headerView addSubview:letter];
     
     UILabel *contacts = [[UILabel alloc]
@@ -121,7 +120,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
                                                   60, 60)];
     contacts.textColor = collapsed ? collapsedColor : expandedGrayColor;
     contacts.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightLight];;
-    NSInteger contactsCount = ((NSArray *)self.data[section][1]).count;
+    NSInteger contactsCount = [self.viewModel getContactsInSection:section];
     contacts.text = [NSString stringWithFormat:@"контактов: %ld", contactsCount];
     [headerView addSubview:contacts];
     
@@ -180,13 +179,11 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *array = self.data[section];
-    NSArray *arrayNames = array[1];
-    return [self.collapsedSet containsObject:[NSNumber numberWithInteger:section]] ? 0 : arrayNames.count;
+    return [self.collapsedSet containsObject:[NSNumber numberWithInteger:section]] ? 0 : [self.viewModel getContactsInSection:section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.data.count;
+    return [self.viewModel getSectionsCount];
 }
 
 

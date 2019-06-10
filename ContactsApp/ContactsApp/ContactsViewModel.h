@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface ContactsViewModel : NSObject
--(NSMutableArray *)getData;
+-(void)getData;
+-(NSString *)getContactNameBySection:(NSInteger)section row:(NSUInteger)row;
+-(NSString *)getSectionNameBySection:(NSInteger)section;
+-(NSInteger)getContactsInSection:(NSInteger)section;
+-(NSInteger)getSectionsCount;
 @end
