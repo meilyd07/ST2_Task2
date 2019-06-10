@@ -41,6 +41,10 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
        NSFontAttributeName:font}];
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barTintColor = [UINavigationBar appearance].barTintColor;
+    UIView *navBarLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.navigationController.navigationBar.frame),
+                                                                      CGRectGetWidth(self.navigationController.navigationBar.frame), 1)];
+    navBarLineView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
+    [self.navigationController.navigationBar addSubview:navBarLineView];
 }
 
 -(void)setupTable {
@@ -200,5 +204,22 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     return [self.viewModel getSectionsCount];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Person *contact = [self.viewModel getContactBySection:indexPath.section row:indexPath.row];
+    
+    NSString *stringMessage = [NSString stringWithFormat:@"Контакт %@ %@, номер телефона %@", contact.name, contact.lastName, contact.phones[0]];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle : @""
+                                                                    message : stringMessage
+                                                             preferredStyle : UIAlertControllerStyleAlert];
+    UIAlertAction * ok = [UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction * action)
+                          { }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 @end

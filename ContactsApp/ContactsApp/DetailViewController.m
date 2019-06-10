@@ -39,6 +39,10 @@ static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
        NSFontAttributeName:font}];
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barTintColor = [UINavigationBar appearance].barTintColor;
+    UIView *navBarLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.navigationController.navigationBar.frame),
+                                                                      CGRectGetWidth(self.navigationController.navigationBar.frame), 1)];
+    navBarLineView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
+    [self.navigationController.navigationBar addSubview:navBarLineView];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
