@@ -8,14 +8,23 @@
 
 #import "ContactsViewController.h"
 #import "ContactCell.h"
+#import "CellDelegate.h"
+#import "DetailViewController.h"
 
-@interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource, CellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableSet *collapsedSet;
 @end
 
 @implementation ContactsViewController
 static NSString *TableViewCellIdentifier = @"ContactCell";
+
+
+- (void)didClickOnCellAtIndex:(NSInteger)cellIndexRow section:(NSInteger)cellIndexSection {
+    DetailViewController *vc = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
+    vc.person = [self.viewModel getContactBySection:cellIndexSection row:cellIndexRow];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,6 +98,9 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     }
     
     contactCell.contactName.text = [self.viewModel getContactNameBySection:indexPath.section row:indexPath.row];
+    contactCell.delegate = self;
+    contactCell.cellIndexRow = indexPath.row;
+    contactCell.cellIndexRow = indexPath.section;
     return contactCell;
     
 }

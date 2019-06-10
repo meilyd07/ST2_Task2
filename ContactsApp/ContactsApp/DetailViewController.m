@@ -2,31 +2,116 @@
 //  DetailViewController.m
 //  ContactsApp
 //
-//  Created by Hanna Rybakova on 6/8/19.
+//  Created by Hanna Rybakova on 6/10/19.
 //  Copyright © 2019 None. All rights reserved.
 //
 
 #import "DetailViewController.h"
+#import "PhoneCell.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation DetailViewController
+//static NSString *TableViewAvatarCellIdentifier = @"AvatarCell";
+static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setupTable];
+    [self setupNavigationBar];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)setupTable {
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 70;
 }
-*/
 
+- (void)setupNavigationBar {
+    [self setTitle:@"Контакты"];
+    UIFont *font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor blackColor],
+       NSFontAttributeName:font}];
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PhoneCell *contactCell = nil;
+    
+    contactCell = [tableView dequeueReusableCellWithIdentifier:TableViewPhoneCellIdentifier];
+    if (contactCell == nil){
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"PhoneCell"
+                                                      owner:self options:nil];
+        contactCell = (PhoneCell *)[nibs objectAtIndex:0];
+    }
+    
+    contactCell.phoneNumber = self.person.phones[indexPath.row];
+    return contactCell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,
+                                                                  tableView.bounds.size.width, 280)];
+    headerView.layer.borderWidth = 0.5;
+    headerView.layer.borderColor = [[UIColor colorWithRed:223.0f/255.0f green:223.0f/255.0f blue:223.0f/255.0f alpha:1.0f] CGColor];
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *contactName = [[UILabel alloc]
+                       initWithFrame:CGRectMake(0, 0,
+                                                40, 60)];
+    contactName.textColor = [UIColor blackColor];
+    contactName.font = [UIFont systemFontOfSize:23.0 weight:UIFontWeightMedium];
+    contactName.text = [NSString stringWithFormat:@"%@ %@", self.person.lastName, self.person.name];
+    [headerView addSubview:contactName];
+    
+    contactName.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    UIImageView *avatarImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,150,150)];
+    if (self.person.image == nil) {
+        avatarImageView.image = [UIImage imageNamed:@"noPhoto"];
+    } else {
+        avatarImageView.image = self.person.image;
+    }
+    [headerView addSubview:avatarImageView];
+    
+    avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:headerView attribute:NSLayoutAttributeTop multiplier:1 constant:25];
+    
+    NSLayoutConstraint *centerImageX = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:headerView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    
+    NSLayoutConstraint *centerContactsX = [NSLayoutConstraint constraintWithItem:contactName attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:headerView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    
+    NSLayoutConstraint *distance = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:contactName attribute:NSLayoutAttributeTop multiplier:1 constant:-25];
+    [headerView addConstraint:centerImageX];
+    [headerView addConstraint:top];
+    [headerView addConstraint:centerContactsX];
+    [headerView addConstraint:distance];
+    
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:160];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:avatarImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:160];
+    [headerView addConstraint:width];
+    [headerView addConstraint:height];
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.1f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 280;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.person.phones.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
 @end

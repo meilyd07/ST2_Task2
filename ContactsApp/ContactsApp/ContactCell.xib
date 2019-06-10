@@ -29,6 +29,9 @@
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnk-FJ-kGT">
                         <rect key="frame" x="238" y="11" width="22" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <action selector="onTapInfo:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cNj-gC-XHb"/>
+                        </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>

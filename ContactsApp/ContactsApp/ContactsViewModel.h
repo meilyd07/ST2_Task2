@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Person.h"
 
 @interface ContactsViewModel : NSObject
 -(void)getData;
@@ -14,4 +15,5 @@
 -(NSString *)getSectionNameBySection:(NSInteger)section;
 -(NSInteger)getContactsInSection:(NSInteger)section;
 -(NSInteger)getSectionsCount;
+-(Person *)getContactBySection:(NSInteger)section row:(NSUInteger)row;
 @end

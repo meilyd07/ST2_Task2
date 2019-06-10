@@ -10,6 +10,14 @@
 
 @implementation ContactCell
 
+- (IBAction)onTapInfo:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickOnCellAtIndex:section:)]) {
+        [self.delegate didClickOnCellAtIndex:_cellIndexRow section:_cellIndexSection];
+    }
+}
+
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     UIView *bgColorView = [[UIView alloc] init];

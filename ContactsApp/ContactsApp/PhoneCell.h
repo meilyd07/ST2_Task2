@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  PhoneCell.h
 //  ContactsApp
 //
 //  Created by Hanna Rybakova on 6/10/19.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Person.h"
 
-@interface DetailViewController : UIViewController
-@property (strong, nonatomic) Person *person;
+@interface PhoneCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumber;
+
 @end

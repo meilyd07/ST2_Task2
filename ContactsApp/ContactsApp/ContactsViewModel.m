@@ -30,6 +30,11 @@
     return fullName;
 }
 
+
+-(Person *)getContactBySection:(NSInteger)section row:(NSUInteger)row {
+    return ((Person *)self.data[section][1][row]);
+}
+
 -(NSString *)getSectionNameBySection:(NSInteger)section {
     return self.data[section][0];
 }
