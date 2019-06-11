@@ -74,12 +74,14 @@
                     [array addObject:newPerson];
                 }
                 
-                NSMutableArray *arrIndexSection =[@[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",@"А",@"Б",@"В",@"Г",@"Д",@"Е",@"Ё",@"Ж",@"З",@"И",@"К",@"Л",@"М",@"Н",@"О",@"П",@"Р",@"С",@"Т",@"У",@"Ф",@"Х",@"Ц",@"Ш",@"Щ",@"Ъ",@"Ы",@"Ь",@"Э",@"Ю",@"Я"] mutableCopy];
+                NSMutableArray *arrIndexSection =[@[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",@"А",@"Б",@"В",@"Г",@"Д",@"Е",@"Ж",@"З",@"И",@"К",@"Л",@"М",@"Н",@"О",@"П",@"Р",@"С",@"Т",@"У",@"Ф",@"Х",@"Ц",@"Ш",@"Щ",@"Ъ",@"Ы",@"Ь",@"Э",@"Ю",@"Я"] mutableCopy];
+                NSString *emptyString = @"";
                 
                 NSMutableArray *resultArray = [[NSMutableArray alloc] init];
                 for(int i=0; i<arrIndexSection.count; i++) {
                     NSString *first = arrIndexSection[i];
-                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.lastName BEGINSWITH[cd] %@", first];
+                    NSPredicate *predicate =
+                    [NSPredicate predicateWithFormat:@"(self.lastName BEGINSWITH[cd] %@) OR (self.lastName == %@ AND self.name BEGINSWITH[cd] %@)", first, emptyString, first];
                     NSMutableArray *tempArray = [[array filteredArrayUsingPredicate:predicate] mutableCopy];
                     if (tempArray.count > 0) {
                         [resultArray addObject:
@@ -88,7 +90,8 @@
                     }
                 }
                 //for not alphabetic
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (self.lastName MATCHES[c] '^[A-Za-zА-Яа-я].*')"];
+                NSPredicate *predicate =
+                [NSPredicate predicateWithFormat:@"(NOT (self.lastName MATCHES[c] '^[A-Za-zА-Яа-я].*')) AND (self.lastName.length > 0)"];
                 NSMutableArray *tempArray = [[array filteredArrayUsingPredicate:predicate] mutableCopy];
                 if (tempArray.count > 0) {
                     [resultArray addObject:@[@"#", tempArray]];
