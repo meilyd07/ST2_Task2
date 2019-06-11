@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactsViewController">
             <connections>
+                <outlet property="errorView" destination="2oB-C4-mRn" id="nkT-Xz-pLg"/>
                 <outlet property="tableView" destination="9PF-Ni-qKQ" id="Trm-k4-XRn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,8 +29,33 @@
                     <color key="separatorColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="sectionIndexBackgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oB-C4-mRn" userLabel="ErrorView">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Доступ к списку контактов запрещен. Войдите в Settings и разрешите доступ.​" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKG-lo-kEe">
+                            <rect key="frame" x="107" y="359" width="200" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="Qp8-te-o8z"/>
+                                <constraint firstAttribute="width" constant="200" id="YGe-bl-Bct"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="bKG-lo-kEe" firstAttribute="centerX" secondItem="2oB-C4-mRn" secondAttribute="centerX" id="c3G-o8-LIO"/>
+                        <constraint firstItem="bKG-lo-kEe" firstAttribute="centerY" secondItem="2oB-C4-mRn" secondAttribute="centerY" id="v2n-D9-gzh"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="2oB-C4-mRn" secondAttribute="trailing" id="2mG-rL-AmK"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="2oB-C4-mRn" secondAttribute="bottom" id="BtI-eE-t4P"/>
+                <constraint firstItem="2oB-C4-mRn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="LxI-F5-DLc"/>
+                <constraint firstItem="2oB-C4-mRn" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="MbD-uY-3vQ"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="166.66666666666669" y="35.491071428571423"/>
         </view>

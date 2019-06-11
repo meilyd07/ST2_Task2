@@ -10,15 +10,52 @@
 #import "ContactCell.h"
 #import "CellDelegate.h"
 #import "DetailViewController.h"
+#import <Contacts/Contacts.h>
 
 @interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource, CellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableSet *collapsedSet;
+@property (weak, nonatomic) IBOutlet UIView *errorView;
 @end
 
 @implementation ContactsViewController
 static NSString *TableViewCellIdentifier = @"ContactCell";
 
+- (id) init
+{
+    self = [super init];
+    if (!self) return nil; 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contactRequestFailedNotification:)
+                                                 name:@"ContactRequestFailed"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contactRequestGrantedNotification:)
+                                                 name:@"ContactRequestGranted"
+                                               object:nil];
+    return self;
+}
+
+- (void) contactRequestFailedNotification:(NSNotification *) notification
+{
+    if ([[notification name] isEqualToString:@"ContactRequestFailed"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.tableView.hidden = YES;
+            self.errorView.hidden = NO;
+        });
+    }
+}
+
+- (void) contactRequestGrantedNotification:(NSNotification *) notification
+{
+    if ([[notification name] isEqualToString:@"ContactRequestGranted"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.tableView.hidden = NO;
+            self.errorView.hidden = YES;
+            [self.tableView reloadData];
+        });
+    }
+}
 
 - (void)didClickOnCellAtIndex:(NSInteger)cellIndexRow section:(NSInteger)cellIndexSection {
     DetailViewController *vc = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
@@ -28,9 +65,24 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupTable];
-    [self addTableConstraints];
-    [self setupNavigationBar];
+    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    if( status == CNAuthorizationStatusDenied || status == CNAuthorizationStatusRestricted)
+    {
+        self.tableView.hidden = YES;
+        self.errorView.hidden = NO;
+        self.navigationController.navigationBar.hidden = YES;
+    } else {
+        self.tableView.hidden = NO;
+        self.errorView.hidden = YES;
+        [self setupTable];
+        [self addTableConstraints];
+        [self setupNavigationBar];
+    }
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -50,6 +102,8 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
      [UINavigationBar appearance].titleTextAttributes];
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barTintColor = [UINavigationBar appearance].barTintColor;
+     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    self.navigationController.navigationBar.tintColor = [UINavigationBar appearance].tintColor;
     UIView *navBarLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.navigationController.navigationBar.frame),
                                                                       CGRectGetWidth(self.navigationController.navigationBar.frame), 1)];
     navBarLineView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
