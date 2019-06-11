@@ -42,6 +42,7 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
         dispatch_async(dispatch_get_main_queue(), ^{
             self.tableView.hidden = YES;
             self.errorView.hidden = NO;
+            self.navigationController.navigationBar.hidden = YES;
         });
     }
 }
