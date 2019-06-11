@@ -31,7 +31,6 @@
 		6A88525822AC6175007A5F82 /* ContactsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
 		6A88525B22AC6514007A5F82 /* ContactsViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsViewModel.h; sourceTree = "<group>"; };
 		6A88525C22AC6514007A5F82 /* ContactsViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewModel.m; sourceTree = "<group>"; };
-		6A88525E22AC673D007A5F82 /* ContactTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
 		6A88526522AC6FD8007A5F82 /* ContactCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
 		6A88526622AC6FD8007A5F82 /* ContactCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 		6A88526722AC6FD8007A5F82 /* ContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
@@ -93,7 +92,6 @@
 				6A88525822AC6175007A5F82 /* ContactsViewController.xib */,
 				6A88525B22AC6514007A5F82 /* ContactsViewModel.h */,
 				6A88525C22AC6514007A5F82 /* ContactsViewModel.m */,
-				6A88525E22AC673D007A5F82 /* ContactTableViewCell.h */,
 				6AFDC0EE22AE473100FEB475 /* DetailViewController.h */,
 				6AFDC0EF22AE473100FEB475 /* DetailViewController.m */,
 				6AFDC0F022AE473100FEB475 /* DetailViewController.xib */,

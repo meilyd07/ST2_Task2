@@ -16,8 +16,6 @@
     }
 }
 
-
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     UIView *bgColorView = [[UIView alloc] init];

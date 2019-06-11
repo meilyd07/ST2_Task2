@@ -71,6 +71,9 @@ static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
     contactName.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIImageView *avatarImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,150,150)];
+    avatarImageView.layer.cornerRadius = 75;
+    avatarImageView.clipsToBounds = YES;
+    
     if (self.person.image == nil) {
         avatarImageView.image = [UIImage imageNamed:@"noPhoto"];
     } else {
