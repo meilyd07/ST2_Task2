@@ -16,4 +16,5 @@
 -(NSInteger)getContactsInSection:(NSInteger)section;
 -(NSInteger)getSectionsCount;
 -(Person *)getContactBySection:(NSInteger)section row:(NSUInteger)row;
+-(void)deleteContact:(NSInteger)section row:(NSUInteger)row;
 @end

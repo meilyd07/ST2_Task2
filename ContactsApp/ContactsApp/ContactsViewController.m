@@ -134,6 +134,13 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     [self.view addConstraint:trailing];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.viewModel deleteContact:indexPath.section row:indexPath.row];
+        [self.tableView reloadData];
+    }
+}
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
     ContactCell *contactCell = nil;
