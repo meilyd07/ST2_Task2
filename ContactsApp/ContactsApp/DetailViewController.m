@@ -11,16 +11,18 @@
 
 @interface DetailViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @end
 
 @implementation DetailViewController
 static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self setTitle:@"Контакты"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTable];
-    [self setupNavigationBar];
 }
 
 -(void)setupTable {
@@ -29,20 +31,6 @@ static NSString *TableViewPhoneCellIdentifier = @"PhoneCell";
     self.tableView.rowHeight = 70;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.alwaysBounceVertical = NO;
-}
-
-- (void)setupNavigationBar {
-    [self setTitle:@"Контакты"];
-    UIFont *font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor blackColor],
-       NSFontAttributeName:font}];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    self.navigationController.navigationBar.barTintColor = [UINavigationBar appearance].barTintColor;
-    UIView *navBarLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.navigationController.navigationBar.frame),
-                                                                      CGRectGetWidth(self.navigationController.navigationBar.frame), 1)];
-    navBarLineView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
-    [self.navigationController.navigationBar addSubview:navBarLineView];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

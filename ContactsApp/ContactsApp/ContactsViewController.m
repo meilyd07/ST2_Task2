@@ -33,18 +33,60 @@ static NSString *TableViewCellIdentifier = @"ContactCell";
     [self setupNavigationBar];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationItem.title = @" ";
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationItem.title = @"Контакты";
+}
+
 - (void)setupNavigationBar {
-    [self setTitle:@"Контакты"];
     UIFont *font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:font}];
     [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor blackColor],
-       NSFontAttributeName:font}];
+     [UINavigationBar appearance].titleTextAttributes];
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barTintColor = [UINavigationBar appearance].barTintColor;
     UIView *navBarLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.navigationController.navigationBar.frame),
                                                                       CGRectGetWidth(self.navigationController.navigationBar.frame), 1)];
     navBarLineView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
     [self.navigationController.navigationBar addSubview:navBarLineView];
+    navBarLineView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:navBarLineView
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.navigationController.navigationBar
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                 multiplier:1.0f
+                                                                   constant:0];
+    [self.navigationController.navigationBar addConstraint:leading];
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:navBarLineView
+                                                               attribute:NSLayoutAttributeTrailing
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.navigationController.navigationBar
+                                                               attribute:NSLayoutAttributeTrailing
+                                                              multiplier:1.0f
+                                                                constant:0];
+    [self.navigationController.navigationBar addConstraint:trailing];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:navBarLineView
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.navigationController.navigationBar
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0f
+                                                                 constant:0];
+    [self.navigationController.navigationBar addConstraint:top];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:navBarLineView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1.0f
+                                                                 constant:1];
+    [self.navigationController.navigationBar addConstraint:height];
 }
 
 -(void)setupTable {
